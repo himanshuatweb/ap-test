@@ -2,6 +2,10 @@
 
 This is the README file for the `ap-test` project, a private React-based application.
 
+## Live Demo
+
+The application is hosted and can be accessed at [https://ap-test.onrender.com](https://ap-test.onrender.com).
+
 ## Prerequisites
 
 Before running the project, ensure you have the following installed:
