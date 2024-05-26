@@ -1,9 +1,20 @@
-import React from 'react'
-import { AiFillCaretDown } from "react-icons/ai";
+import React, { useEffect, useState } from 'react'
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaAngleRight } from "react-icons/fa6";
+import DropDown from './Menu/DropDown';
+import useFetchData from '../hooks/useFetchData';
+import { structureData } from '../utils/structureData';
 
 const InnerNavBar = () => {
+
+    const { data: tagsData } = useFetchData('https://api.acharyaprashant.org/v2/legacy/courses/tags')
+    const [menuData, setMenuData] = useState([])
+
+    useEffect(() => {
+        if (tagsData)
+            setMenuData(structureData(tagsData))
+    }, [tagsData])
+
     return (
         <>
             <div id="inner-nav-bar" className="sticky top-0 z-50 bg-white shadow">
@@ -18,15 +29,7 @@ const InnerNavBar = () => {
                                     <div className="items-center rounded border border-gray-disabled shadow-sm">
                                         <div className="relative">
                                             <div className="relative flex w-full flex-row">
-                                                <button className="flex flex-row items-center whitespace-nowrap rounded-l border-r pl-2 text-xs font-normal">
-                                                    <div className="text-xs font-medium text-gray-subtitle">
-                                                        <span className="font-hi pt-[3px]">सभी</span>
-                                                    </div>
-                                                    <div className="px-3 text-slate-500">
-                                                        <AiFillCaretDown size={12} />
-
-                                                    </div>
-                                                </button>
+                                                <DropDown data={menuData} />
                                                 <input
                                                     type="search"
                                                     className="h-9 w-full border-0 text-gray-title caret-brand-600 focus:ring-0"
